@@ -5,11 +5,12 @@ import numpy as np
 import os
 from PIL import Image
 import json
-base_path = '../'
+# base_path = '../'
 
 class StyleCNN:
 
-    modelPath = base_path + 'RetiAllenate/fine-tuned/style/my_model'
+    # modelPath = base_path + 'RetiAllenate/fine-tuned/style/my_model'
+    modelPath = 'styleCNN/my_model'
     inputTargetSize = (224, 224)
     styleExtractedFeaturesPath = base_path + 'extractedFeatures/actualImage.json'
     extractedFeaturesFileName = 'style_deep_feature.json'
