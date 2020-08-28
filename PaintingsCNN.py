@@ -5,7 +5,7 @@ import numpy as np
 import os
 from PIL import Image
 import json
-# base_path = '../'
+base_path = './'
 
 class StyleCNN:
 
