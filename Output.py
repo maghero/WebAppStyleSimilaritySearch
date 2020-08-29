@@ -18,7 +18,7 @@ class Output:
         html += "<p>Style:</p><ul>"
 
         for key in classes.keys():
-            html += '<li>' + key + ' : ' + str("{:.2f}".format(classes[key]*100))
+            html += '<li>' + key + ' : ' + str("{:.2f}".format(classes[key]*100)) + ' %'
             html += '</li>'
 
         html += "</ul>"
