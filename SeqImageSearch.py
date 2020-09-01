@@ -2,7 +2,7 @@ from ImgDescriptor import ImgDescriptor
 from Parameters import Parameters
 from FeaturesStorage import FeaturesStorage
 
-from PaintingsCNN import StyleCNN
+from StyleCNN import StyleCNN
 from Output import Output
 
 # import java.io.File;
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
     cnn = StyleCNN()
     #Image Query File
-    features = cnn.extractFeatures(Parameters.QRY_IMAGE)
+    features, _ = cnn.extractFeatures(Parameters.QRY_IMAGE)
 
     query = ImgDescriptor(features, Parameters.QRY_IMAGE.split('/')[-1])
 

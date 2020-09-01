@@ -1,23 +1,3 @@
-# import java.io.File;
-# import java.io.IOException;
-# import java.util.ArrayList;
-# import java.util.HashMap;
-# import java.util.List;
-# import java.util.Map;
-
-# import org.apache.http.HttpHost;
-# import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
-# import org.elasticsearch.action.index.IndexRequest;
-# import org.elasticsearch.client.IndicesClient;
-# import org.elasticsearch.client.RequestOptions;
-# import org.elasticsearch.client.RestClient;
-# import org.elasticsearch.client.RestClientBuilder;
-# import org.elasticsearch.client.RestHighLevelClient;
-# import org.elasticsearch.client.indices.CreateIndexRequest;
-# import org.elasticsearch.client.indices.GetIndexRequest;
-# import org.elasticsearch.common.settings.Settings;
-# import org.elasticsearch.common.settings.Settings.Builder;
-
 from ImgDescriptor import ImgDescriptor
 from Parameters import Parameters
 from FeaturesStorage import FeaturesStorage

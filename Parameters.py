@@ -2,15 +2,9 @@ import time
 
 class Parameters:
 
-	# //DEEP parameters
-	# public static final String DEEP_PROTO = "data/caffe/train_val.prototxt";
-	# public static final String DEEP_MODEL = "data/caffe/bvlc_reference_caffenet.caffemodel";
-	# public static final double[] MEAN_VALUES = {104, 117, 123, 0};
-    #
-	# public static final String DEEP_LAYER = "fc7";
-	# public static final int IMG_WIDTH = 227;
-	# public static final int IMG_HEIGHT = 227;
-
+	#CNN Parameters
+	IMG_WIDTH = 224;
+	IMG_HEIGHT = 224;
 
 	#Image Source Folder
 	SRC_FOLDER = "Images"

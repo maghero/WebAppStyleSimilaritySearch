@@ -1,27 +1,7 @@
-# import java.io.File;
-# import java.io.IOException;
-# import java.util.ArrayList;
-# import java.util.Collections;
-# import java.util.HashMap;
-# import java.util.List;
-# import java.util.Map;
-
-# import org.apache.http.HttpHost;
-# import org.apache.lucene.queryparser.classic.ParseException;
-# import org.elasticsearch.action.search.SearchRequest;
-# import org.elasticsearch.action.search.SearchResponse;
-# import org.elasticsearch.client.RequestOptions;
-# import org.elasticsearch.client.RestClient;
-# import org.elasticsearch.client.RestClientBuilder;
-# import org.elasticsearch.client.RestHighLevelClient;
-# import org.elasticsearch.index.query.QueryBuilder;
-# import org.elasticsearch.index.query.QueryBuilders;
-# import org.elasticsearch.search.SearchHit;
-# import org.elasticsearch.search.builder.SearchSourceBuilder;
 from ImgDescriptor import ImgDescriptor
 from Parameters import Parameters
 from FeaturesStorage import FeaturesStorage
-from PaintingsCNN import StyleCNN
+from StyleCNN import StyleCNN
 from Output import Output
 from Fields import Fields
 from Pivots import Pivots
@@ -129,7 +109,7 @@ if __name__ == '__main__':
 
     cnn = StyleCNN()
     #Image Query File
-    imgFeatures = cnn.extractFeatures(imgQuery)
+    imgFeatures, _ = cnn.extractFeatures(imgQuery)
 
     query = ImgDescriptor(imgFeatures, imgQuery.split('/')[-1]);
 

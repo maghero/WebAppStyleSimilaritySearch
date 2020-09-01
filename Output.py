@@ -5,7 +5,7 @@ class Output:
 
     COLUMNS = 5;
 
-    def toHTML(ids, baseURI, outputFile, image, classes, time):
+    def toHTML(ids, baseURI, outputFile, image, styleClasses, artistClasses, time):
         #List<ImgDescriptor> ids, String baseURI, File outputFile
         html = "<html>\n<style>\n"
 
@@ -17,8 +17,19 @@ class Output:
 
         html += "<p>Style:</p><ul>"
 
-        for key in classes.keys():
-            html += '<li>' + key + ' : ' + str("{:.2f}".format(classes[key]*100)) + ' %'
+        for key in styleClasses.keys():
+            html += '<li>' + key + ' : ' + str("{:.2f}".format(styleClasses[key]*100)) + ' %'
+            html += '</li>'
+
+        html += "</ul>"
+
+        html += "<p>Similar Artists:</p><ul>"
+
+        for key in artistClasses.keys():
+            html += '<li>'
+            for splittedName in key.split('_'):
+                html += splittedName.lower().capitalize() + ' '
+            html += ': ' + str("{:.2f}".format(artistClasses[key]*100)) + ' %'
             html += '</li>'
 
         html += "</ul>"

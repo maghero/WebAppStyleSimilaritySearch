@@ -1,6 +1,7 @@
 from Parameters import Parameters
 from ElasticImgSearching import ElasticImgSearching
-from PaintingsCNN import StyleCNN
+from StyleCNN import StyleCNN
+from ArtistCNN import ArtistCNN
 from Output import Output
 from ImgDescriptor import ImgDescriptor
 
@@ -13,16 +14,23 @@ from datetime import datetime
 
 #The search engine connected to elasticsearch
 imgSearch = ElasticImgSearching(Parameters.PIVOTS_FILE, Parameters.TOP_K_QUERY)
-#The neural network used to extract features
-cnn = StyleCNN()
+#The neural network used to extract features and style categorization
+styleCNN = StyleCNN()
+#The neural network used for artist categorization
+artistCNN = ArtistCNN()
 #Done to suppress the warnings during the normal runtime of the application
 #included in the set_up stage
-cnn.extractFeatures(Parameters.QRY_IMAGE)
+styleCNN.extractFeatures(Parameters.QRY_IMAGE)
+artistCNN.extractCategories(Parameters.QRY_IMAGE)
 
 app = Flask(__name__, static_url_path='')
 #Necessary otherwise the server will return always the same page for the search, even if an the image searched is changed
-app.config['TEMPLATES_AUTO_RELOAD'] = True
-
+app.config['TEMPLATES_AUTO_RELOAD'] = True #DO NOT REMOVE
+#In a real application deployment just use always an unique name for the query image such as the IP address of who made the search plus some timestamp
+@app.after_request
+def add_header(response):
+    response.cache_control.no_cache = True
+    return response
 
 @app.route('/', methods=["GET", "POST"])
 def upload_image():
@@ -32,7 +40,8 @@ def upload_image():
             image = request.files["image"]
             image.save(Parameters.QRY_IMAGE)
 
-            imgFeatures, imgCategories = cnn.extractFeatures(Parameters.QRY_IMAGE)
+            imgFeatures, imgCategories = styleCNN.extractFeatures(Parameters.QRY_IMAGE)
+            imgArtists = artistCNN.extractCategories(Parameters.QRY_IMAGE)
 
             query = ImgDescriptor(imgFeatures, Parameters.QRY_IMAGE.split('/')[-1])
             # print("Image Descriptor of Query Created")
@@ -48,7 +57,7 @@ def upload_image():
 
             # Uncomment for the optional step
             res = imgSearch.reorder(query, res)
-            Output.toHTML(res, Parameters.BASE_URI, Parameters.RESULTS_HTML_REORDERED, Parameters.QRY_IMAGE, imgCategories, str(time))
+            Output.toHTML(res, Parameters.BASE_URI, Parameters.RESULTS_HTML_REORDERED, Parameters.QRY_IMAGE, imgCategories, imgArtists, str(time))
 
             #Redirect to the search results
             return redirect("deep.reordered.html")
