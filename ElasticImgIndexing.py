@@ -69,15 +69,6 @@ class ElasticImgIndexing:
     	}
         self.client.indices.create(index = Parameters.INDEX_NAME, body = request_body)
 
-		# IndicesClient idx = client.indices();
-        #
-		# CreateIndexRequest request = new CreateIndexRequest(Parameters.INDEX_NAME);
-        #
-		# Builder s = Settings.builder ().put("index.number_of_shards", 1).put("index.number_of_replicas", 0).put("analysis.analyzer.first.type", "whitespace");
-        #
-		# request.settings(s);
-        #
-		# idx.create (request, RequestOptions.DEFAULT);
 
     def index(self):
 		#LOOP
@@ -85,21 +76,12 @@ class ElasticImgIndexing:
         for imgDescriptor in self.imgDescDataset:
             features = self.pivots.features2Text(imgDescriptor, self.topKIdx)
             request = self.composeRequest(imgDescriptor.getId(), features)
-            ###########??????????????????????????######################
-			# self.client.index(request, RequestOptions.DEFAULT)
             self.client.bulk(index = Parameters.INDEX_NAME, body = request)
 
-        # print(self.client.search(body={"query": {"match_all": {}}}, index = Parameters.INDEX_NAME))
-        # print(self.client.indices.get_mapping(index = Parameters.INDEX_NAME))
 
     def composeRequest(self, id, imgTxt):
 		#Initialize and fill IndexRequest Object with Fields.ID and Fields.IMG txt
         request = [];
-
-		# Map<String, Object> jsonMap = new HashMap<>();
-        #
-		# jsonMap.put(Fields.ID,id);
-		# jsonMap.put(Fields.IMG,imgTxt);
         jsonMap = {}
 
         jsonMap[Fields.ID] = id
@@ -113,9 +95,6 @@ class ElasticImgIndexing:
 	        }
 	    }
 
-		# request = new IndexRequest(Parameters.INDEX_NAME, "doc");
-        #
-		# request.source(jsonMap);
         request.append(op_dict)
         request.append(jsonMap)
 
@@ -123,7 +102,6 @@ class ElasticImgIndexing:
 
 
 if __name__ == '__main__':
-	# try (ElasticImgIndexing esImgIdx = new ElasticImgIndexing(Parameters.PIVOTS_FILE, Parameters.STORAGE_FILE, Parameters.TOP_K_IDX)) {
     esImgIdx = ElasticImgIndexing(Parameters.PIVOTS_FILE, Parameters.STORAGE_FILE, Parameters.TOP_K_IDX)
     print("Creating Index")
     esImgIdx.createIndex()

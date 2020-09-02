@@ -19,7 +19,7 @@ class StyleCNN:
     model = None
 
     # Used only to create the classes dictionary
-    # categories_path = '../DATASET_STYLE/train/'
+    categories_path = '../DATASET_STYLE/train/'
     categories_names = {0: 'abstract_expressionism', 1: 'baroque', 2: 'constructivism',
                         3: 'cubbism', 4: 'impressionism', 5: 'neo-classical', 6: 'popart',
                         7: 'postimpressionism', 8: 'realism', 9: 'renaissance',
@@ -31,6 +31,7 @@ class StyleCNN:
         self.feature_model = tf.keras.Model(inputs=self.model.input, outputs = self.model.layers[index_extract_layer].output)
 
         if self.categories_names == None:
+            self.categories_names = {}
             #Create the dictionary for the classes
             index = 0
             for file in os.listdir(self.categories_path):
@@ -56,16 +57,9 @@ class StyleCNN:
                 # image.show()
 
             arr_image = (np.expand_dims(arr_image, 0))
-            # floatArray = np.array(self.model.predict(self.preprocessFunction(arr_image)))
             intermediate_output = self.feature_model.predict(self.preprocessFunction(arr_image))
             floatArray = np.array(intermediate_output)
-
-            #Compute the specific style categories
-            # categories = self.classes_model(intermediate_output)
             categories = np.array(self.model.layers[-1](intermediate_output))
-            #
-            # feature_vector[imageName] = floatArray[0].tolist()
-            # print(feature_vector)
 
         valuesToReturn = 2
         if categories.max() > 0.9:
@@ -76,10 +70,6 @@ class StyleCNN:
         imageCategories = {}
         for i in range(valuesToReturn):
             index = categories.argmax()
-            # print(categories)
-            # print(index)
-            # print(self.categories_names[index])
-            # print(categories[0][index])
             imageCategories[self.categories_names[index]] = categories[0][index]
             categories[0][index] = -1
 

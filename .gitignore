@@ -123,3 +123,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+extractedFeatures/STYLE/style_paint_deep_feature.json
+extractedFeatures/actualImage.json

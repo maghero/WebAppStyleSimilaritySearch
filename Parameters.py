@@ -13,7 +13,7 @@ class Parameters:
 	QRY_IMAGE = SRC_FOLDER + "/query.jpg"
 
 	#Features Storage File
-	STORAGE_FILE = "../extractedFeatures/STYLE/style_paint_deep_feature.json"
+	STORAGE_FILE = "./extractedFeatures/STYLE/style_paint_deep_feature.json"
 
 	#Feature Source Folder
 	SRC_FEATURE = "../extractedFeatures/actualImage.json"
@@ -38,11 +38,6 @@ class Parameters:
 
     #Elasticsearch Configuration
 	elastic_config = 'http://127.0.0.1:9200/'
-    # {
-	# 	'host': 'localhost',
-    #     'scheme': "http",
-	# 	'port': 9200,
-	# }
 
 	#HTML Output Parameters
 	# BASE_URI = "file:///" + SRC_FOLDER + "/"
