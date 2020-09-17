@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">	
+<title>Similarity Painintgs</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
-<body>
+<body style="text-align: center; background-color:rgb(255, 255, 217);">
 
 <script type="text/javascript">
 	window.addEventListener('load', function() {
@@ -14,20 +15,23 @@
 				img.style.display = "inline-block";
 				document.getElementById("search").disabled = false;
 				document.getElementById("search").style.display = "inline-block";
+				document.getElementById("uploadButton").textContent = "Change image";
 			}
 		});
 	});
 
 </script>
-
+<!-- <div> -->
 <h1>Similarity Paintings Search Engine</h1>
-
+<hr>
+<br>
 <form action="/" method="POST" enctype="multipart/form-data">
-	<button type="button" onclick="document.getElementById('image').click()">Upload the query image</button>
+	<button type="button" id="uploadButton" onclick="document.getElementById('image').click()">Upload the query image</button>
+	<br>
 	<input name="image" id="image" type="file" style="display:none">
 	<br><img style="display: none;" name="image" src="#" alt="Upload an image to search similar ones">
-
-	<br><br><button type="submit" id="search" disabled=true style="display: none;">Search</button>
+		<br><br><button type="submit" id="search" disabled=true style="display: none;">Search</button>
+	<!-- </div> -->
 </form>
 
 </body>

@@ -45,7 +45,7 @@ class ElasticImgSearching:
         res = []
 
 		# convert queryF to text
-        text = self.pivots.features2Text(queryF, k);
+        text = self.pivots.features2Text(queryF, Parameters.TOP_K_QUERY);
 		# call composeSearch to get SearchRequest object
         object = self.composeSearch(text, k);
 		# print("SOMETHING");
@@ -74,30 +74,20 @@ class ElasticImgSearching:
                 }
             }
         }
-        ######################### DUBITO #####################################
         return json.dumps(finalQuery)
-		# QueryBuilder simpleQuery = QueryBuilders.multiMatchQuery(query, Fields.IMG);
-		# SearchSourceBuilder sb = new SearchSourceBuilder();
-		# sb.size(k);
-		# sb.query(simpleQuery);
-        #
-		# SearchRequest sr = new SearchRequest(Parameters.INDEX_NAME);
-		# sr.types("doc");
-		# sr.source(sb);
-	    # return sr;
 
-    def reorder(self, queryF, res):
-        # ImgDescriptor queryF, List<ImgDescriptor> res
-        # return List<ImgDescriptor>
-		# LOOP
-		# for each result evaluate the distance with the query, call  setDist to set the distance, then sort the results
+    def reorder(self, queryF, res, topK):
+        # for each result evaluate the distance with the query, call  setDist to set the distance, then sort the results
         for imgDescriptor in res:
             features = self.imgDescMap[imgDescriptor.getId()]
             imgDescriptor.setFeatures(features)
             imgDescriptor.distance(queryF)
 
         res.sort()
-        return res
+        print(res)
+        print(len(res))
+        print(len(res[:topK]))
+        return res[:topK]
 
 
 if __name__ == '__main__':

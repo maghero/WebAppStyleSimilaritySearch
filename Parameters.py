@@ -3,8 +3,8 @@ import time
 class Parameters:
 
 	#CNN Parameters
-	IMG_WIDTH = 224;
-	IMG_HEIGHT = 224;
+	IMG_WIDTH = 224
+	IMG_HEIGHT = 224
 
 	#Image Source Folder
 	SRC_FOLDER = "Images"
@@ -19,22 +19,25 @@ class Parameters:
 	SRC_FEATURE = "../extractedFeatures/actualImage.json"
 
 	#k-Nearest Neighbors
-	K = 30;
+	K = 30
+
+	#Number of images to get from elastic search
+	NUM_IMAGES = 100
 
 	#Pivots File
 	PIVOTS_FILE = "out/paintings.pivots.dat";
 
 	#Number Of Pivots
-	NUM_PIVOTS = 100;
+	NUM_PIVOTS = 100
 
 	#Top K pivots For Indexing
-	TOP_K_IDX = 10;
+	TOP_K_IDX = 10
 
 	#Top K pivots For Searching
-	TOP_K_QUERY = 10;
+	TOP_K_QUERY = 10
 
 	#Lucene Index
-	INDEX_NAME = "paintings";
+	INDEX_NAME = "paintings"
 
     #Elasticsearch Configuration
 	elastic_config = 'http://127.0.0.1:9200/'

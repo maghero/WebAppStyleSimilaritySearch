@@ -48,7 +48,7 @@ def upload_image():
             # print(query)
 
             time = -Parameters.current_milli_time()
-            res = imgSearch.search(query, Parameters.K)
+            res = imgSearch.search(query, Parameters.NUM_IMAGES)
             time += Parameters.current_milli_time()
 
             print("Search time: " + str(time) + " ms")
@@ -56,7 +56,7 @@ def upload_image():
             # Output.toHTML(res, Parameters.BASE_URI, Parameters.RESULTS_HTML_ELASTIC);
 
             # Uncomment for the optional step
-            res = imgSearch.reorder(query, res)
+            res = imgSearch.reorder(query, res, Parameters.K)
             Output.toHTML(res, Parameters.BASE_URI, Parameters.RESULTS_HTML_REORDERED, Parameters.QRY_IMAGE, imgCategories, imgArtists, str(time))
 
             #Redirect to the search results
@@ -77,6 +77,10 @@ def elastic_reordered():
 @app.route("/Images/<path:path>")
 def send_im(path):
     return send_from_directory('Images', path)
+
+@app.route("/site/<path:path>")
+def send_ic(path):
+    return send_from_directory('site', path)
 
 @app.route("/favicon.ico")
 def favicon():
