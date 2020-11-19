@@ -49,5 +49,5 @@ class Parameters:
 	RESULTS_HTML_ELASTIC = "templates/deep.elastic.html"
 	RESULTS_HTML_REORDERED = "templates/deep.reordered.html"
 
-    #currentTiem
+    #currentTime
 	current_milli_time = lambda: int(round(time.time() * 1000))
